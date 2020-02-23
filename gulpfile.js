@@ -7,23 +7,23 @@ var rename = require('gulp-rename');
 
 // compile scss to css
 gulp.task('sass', function () {
-    return gulp.src('./sass/styles.scss')
+    return gulp.src('./sass/*.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(rename({basename: 'styles.min'}))
-        .pipe(gulp.dest('./css'));
+        .pipe(rename({basename: '*.min'}))
+        .pipe(gulp.dest('./src/public/css'));
 });
 
 // watch changes in scss files and run sass task
 gulp.task('sass:watch', function () {
-    gulp.watch('./sass/**/*.scss', ['sass']);
+    gulp.watch('./sass/*.scss', ['sass']);
 });
 
 // minify js
 gulp.task('minify-js', function () {
-    return gulp.src('./js/scripts.js')
+    return gulp.src('./src/public/js/scripts.js')
         .pipe(uglify())
         .pipe(rename({basename: 'scripts.min'}))
-        .pipe(gulp.dest('./js'));
+        .pipe(gulp.dest('./src/public/js'));
 });
 
 // default task
