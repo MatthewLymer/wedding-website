@@ -4,6 +4,6 @@ services:
   website:
     build: 
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./containers/webapp/Dockerfile
     ports:
       - 8080:80
