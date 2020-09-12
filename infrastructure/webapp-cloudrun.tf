@@ -48,6 +48,19 @@ resource "google_cloud_run_domain_mapping" "default" {
   }
 }
 
+resource "google_cloud_run_domain_mapping" "www" {
+  location = "us-central1"
+  name = "www.dioneandmatthew.com"
+
+  metadata {
+    namespace = local.project.id
+  }
+
+  spec {
+    route_name = google_cloud_run_service.default.name
+  }
+}
+
 output "url" {
   value = google_cloud_run_service.default.status[0].url
 }
