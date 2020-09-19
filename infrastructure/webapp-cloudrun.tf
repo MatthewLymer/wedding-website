@@ -7,7 +7,7 @@ resource "google_cloud_run_service" "default" {
       containers {
         image = "gcr.io/matthewlymer-dioneandmatthew/webapp"
         ports {
-          container_port = 80
+          container_port = 5000
         }
       }
     }

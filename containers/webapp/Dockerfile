@@ -1,19 +1,17 @@
 # BUILD
-########
-FROM node:13 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 
 WORKDIR /app
 
-COPY ./gulpfile.js ./gulpfile.js
-COPY ./package.json ./package.json
 COPY ./src/ ./src/
 
-RUN npm install
-RUN npm install --global gulp-cli
-RUN gulp
+RUN dotnet publish ./src/Wedding.WebApp --configuration Release --output /app/artifacts
 
-# RUNTIME IMAGE
-################
-FROM httpd:2.4
+# RUNTIME
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 
-COPY --from=build /app/src/public/ /usr/local/apache2/htdocs/
+WORKDIR /app
+
+COPY --from=build /app/artifacts ./
+
+ENTRYPOINT ["dotnet", "Wedding.WebApp.dll"]
