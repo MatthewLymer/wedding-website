@@ -92,7 +92,7 @@ $(document).ready(function () {
             if (scroll >= 20) {
                 $('section.navigation').addClass('fixed');
                 $('header').css({
-                    "border-bottom": "none",
+                    /*"border-bottom": "none",*/
                     "padding": "35px 0"
                 });
                 $('header .member-actions').css({
@@ -104,7 +104,7 @@ $(document).ready(function () {
             } else {
                 $('section.navigation').removeClass('fixed');
                 $('header').css({
-                    "border-bottom": "solid 1px rgba(255, 255, 255, 0.2)",
+                    /*"border-bottom": "solid 1px rgba(255, 255, 255, 0.2)",*/
                     "padding": "50px 0"
                 });
                 $('header .member-actions').css({
