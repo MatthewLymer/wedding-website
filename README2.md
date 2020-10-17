@@ -15,7 +15,7 @@ The wedding website for Dione and Matthew
 docker-compose up
 ```
 
-Then browse to http://localhost:8080.
+Then browse to http://localhost:5000.
 
 
 # Hosting

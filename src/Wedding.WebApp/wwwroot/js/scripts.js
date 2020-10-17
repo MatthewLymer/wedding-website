@@ -241,30 +241,40 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = {lat: 22.5932759, lng: 88.27027720000001};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 15,
-        center: location,
+
+    const center = new google.maps.LatLng(43.36925, -79.736887);
+
+    const request = {
+        query: "St. Patrick's Catholic Church",
+        fields: ['name', 'geometry'],
+    };
+
+    const map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 17,
+        center: center,
         scrollwheel: false
-    });
+    });    
+    
+    const service = new google.maps.places.PlacesService(map);
 
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-}
+    const infoWindow = new google.maps.InfoWindow();
 
-function initBBSRMap() {
-    var la_fiesta = {lat: 20.305826, lng: 85.85480189999998};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 15,
-        center: la_fiesta,
-        scrollwheel: false
-    });
+    service.findPlaceFromQuery(request, function(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+                const place = results[i];
 
-    var marker = new google.maps.Marker({
-        position: la_fiesta,
-        map: map
+                const marker = new google.maps.Marker({
+                    map: map,
+                    position: center //place.geometry.location
+                });
+
+                google.maps.event.addListener(marker, "click", () => {
+                    infoWindow.setContent(place.name);
+                    infoWindow.open(map);
+                });
+            }
+        }
     });
 }
 

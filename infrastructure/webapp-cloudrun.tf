@@ -2,10 +2,12 @@ resource "google_cloud_run_service" "default" {
   name = "webapp-service"
   location = "us-central1" # cloud-run does not work in Canada yet
 
+  autogenerate_revision_name = true
+
   template {
     spec {
       containers {
-        image = "gcr.io/matthewlymer-dioneandmatthew/webapp"
+        image = "gcr.io/matthewlymer-dioneandmatthew/webapp:latest"
         ports {
           container_port = 5000
         }
