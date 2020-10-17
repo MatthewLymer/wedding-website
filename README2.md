@@ -49,16 +49,8 @@ If this is the first time you've run terraform for this project, you may receive
 
 Once terraform has configured the project properly you can now upload the docker image.
 
-## Docker image
+## Build and Deploy docker image
 
 ```
-docker run -it --rm -v ${HOME}/.config/gcloud:/root/.config/gcloud -w /data -v ${PWD}:/data -v /var/run/docker.sock:/var/run/docker.sock google/cloud-sdk
-```
-
-Then from within the shell, you can build and push a docker container.
-
-```
-gcloud auth configure-docker
-docker build -t gcr.io/matthewlymer-dioneandmatthew/webapp:latest -f ./containers/webapp/Dockerfile .
-docker push gcr.io/matthewlymer-dioneandmatthew/webapp:latest
+docker run -it --rm -v ${HOME}/.config/gcloud:/root/.config/gcloud -w /data -v ${PWD}:/data -v /var/run/docker.sock:/var/run/docker.sock google/cloud-sdk /bin/bash "-c" "make push-docker"
 ```
