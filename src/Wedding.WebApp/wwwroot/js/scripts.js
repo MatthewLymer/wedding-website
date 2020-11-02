@@ -244,10 +244,10 @@ function initMap() {
 
     const center = new google.maps.LatLng(43.36925, -79.736887);
 
-    const request = {
-        query: "St. Patrick's Catholic Church",
-        fields: ['name', 'geometry'],
-    };
+    // const request = {
+    //     query: "St. Patrick's Catholic Church",
+    //     fields: ['name', 'geometry'],
+    // };
 
     const map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 17,
@@ -255,27 +255,27 @@ function initMap() {
         scrollwheel: false
     });    
     
-    const service = new google.maps.places.PlacesService(map);
+    // const service = new google.maps.places.PlacesService(map);
+    //
+    // const infoWindow = new google.maps.InfoWindow();
 
-    const infoWindow = new google.maps.InfoWindow();
-
-    service.findPlaceFromQuery(request, function(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-                const place = results[i];
-
-                const marker = new google.maps.Marker({
-                    map: map,
-                    position: center //place.geometry.location
-                });
-
-                google.maps.event.addListener(marker, "click", () => {
-                    infoWindow.setContent(place.name);
-                    infoWindow.open(map);
-                });
-            }
-        }
-    });
+    // service.findPlaceFromQuery(request, function(results, status) {
+    //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+    //         for (let i = 0; i < results.length; i++) {
+    //             const place = results[i];
+    //
+    //             const marker = new google.maps.Marker({
+    //                 map: map,
+    //                 position: center //place.geometry.location
+    //             });
+    //
+    //             google.maps.event.addListener(marker, "click", () => {
+    //                 infoWindow.setContent(place.name);
+    //                 infoWindow.open(map);
+    //             });
+    //         }
+    //     }
+    // });
 }
 
 // alert_markup
