@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,16 +10,25 @@ namespace Wedding.WebApp
     internal sealed class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
+            _env = env;
         }        
         
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public void ConfigureServices(IServiceCollection services)
         {
+            var mvcBuilder = services.AddRazorPages();
+
+            if (_env.IsDevelopment())
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+            }
+            
             services.AddWebOptimizer(pipeline =>
             {
                 pipeline.MinifyJsFiles();
@@ -33,28 +37,23 @@ namespace Wedding.WebApp
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             
             app.UseWebOptimizer();
-
-            app.UseDefaultFiles();
-
+            
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapGet("/", async context =>
-            //     {
-            //         await context.Response.WriteAsync("Hello World!");
-            //     });
-            // });
+            app.UseEndpoints(x =>
+            {
+                x.MapRazorPages();
+            });
         }
     }
 }
