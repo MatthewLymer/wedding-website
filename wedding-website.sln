@@ -7,6 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{66E416BA-135
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.WebApp", "src\Wedding.WebApp\Wedding.WebApp.csproj", "{6FEC92BD-C4DF-4010-8CA5-9C4988D30AC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{E7A4067A-BFA3-4673-9A9C-7BD50835D2C5}"
+ProjectSection(SolutionItems) = preProject
+	.dockerignore = .dockerignore
+	.gitignore = .gitignore
+	docker-compose.yml = docker-compose.yml
+	LICENSE = LICENSE
+	Makefile = Makefile
+	README.md = README.md
+	README2.md = README2.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
