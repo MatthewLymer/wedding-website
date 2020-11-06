@@ -11,6 +11,14 @@ resource "google_cloud_run_service" "default" {
         ports {
           container_port = 5000
         }
+        env {
+          name = "WW_PORT"
+          value = "5000"
+        }
+        env {
+          name = "WW_GOOGLE_API_KEY"
+          value = var.WW_GOOGLE_API_KEY
+        }
       }
     }
   }
