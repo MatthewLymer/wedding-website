@@ -40,3 +40,4 @@ package-lock.json
 .terraform
 bin/
 obj/
+_ReSharper.Caches/
