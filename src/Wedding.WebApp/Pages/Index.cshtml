@@ -4,6 +4,7 @@
 @{
     var googleApiKey = Environment.GetEnvironmentVariable("WW_GOOGLE_API_KEY");
     var liveStreamUrl = Environment.GetEnvironmentVariable("WW_LIVE_STREAM_URL");
+    var liveStreamPasscode = Environment.GetEnvironmentVariable("WW_LIVE_STREAM_PASSCODE");
 }
 
 <!doctype html>
@@ -300,6 +301,13 @@
                             View the Live Stream
                         </a>
                     </p>
+                    
+                    @if (!string.IsNullOrEmpty(liveStreamPasscode))
+                    {
+                        <p>
+                            If prompted for a passcode, use: <strong>@liveStreamPasscode</strong>
+                        </p>
+                    }
                 }
             </div>
         </div>
