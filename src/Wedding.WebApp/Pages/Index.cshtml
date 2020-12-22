@@ -1,6 +1,11 @@
 ﻿@page
 @model Wedding.WebApp.Pages.Index
 
+@{
+    var googleApiKey = Environment.GetEnvironmentVariable("WW_GOOGLE_API_KEY");
+    var liveStreamUrl = Environment.GetEnvironmentVariable("WW_LIVE_STREAM_URL");
+}
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -72,7 +77,7 @@
             <div class="col-md-12 text-center">
                 <h3>We are getting married</h3>
                 <p>
-                    The date is the 28<sup>th</sup> of December 2020 and we would like you to be a part of it.
+                    The date is the 23<sup>rd</sup> of December 2020 and we would like you to be a part of it.
                 </p>
             </div>
         </div>
@@ -114,9 +119,9 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12 leftcol">
                 <div class="wp3">
-                    <p><strong>28th December, 2020</strong></p>
+                    <p><strong>23rd December, 2020</strong></p>
 
-                    <h5>Ceremony <span class="time">2PM - 3PM</span></h5>
+                    <h5>Ceremony <span class="time">11AM - 12PM (Eastern Standard Time)</span></h5>
                     <p>Our wedding ceremony will be held at St. Patricks Catholic Church in Burlington.  Due to limited seating in the church and personal health concerns all our guests cannot be accommodated in person.  For those unable to join us in person a link to the live stream of the service will be available on this website.  Masks and other mandatory social distancing measures will need to be adhered during the mass.</p>
                 </div>
             </div>
@@ -284,11 +289,18 @@
                 <h3>View the ceremony</h3>
                 <p>For those who would like to celebrate with us virtually, we will be live streaming the service online.</p>
                 
-                <form class="rsvp-form">
-                    <button class="btn-fill rsvp-btn">
-                        View the Live Stream
-                    </button>
-                </form>
+                @if (string.IsNullOrEmpty(liveStreamUrl))
+                {
+                    <p><strong>The live stream is not yet ready, please check again later.</strong></p>
+                }
+                else
+                {
+                    <p class="rsvp-form">
+                        <a href="@liveStreamUrl" class="btn-fill rsvp-btn">
+                            View the Live Stream
+                        </a>
+                    </p>
+                }
             </div>
         </div>
     </div>    
@@ -368,6 +380,6 @@
 <script src="js/jquery.waypoints.min.js"></script>
 <script src="js/vendor/ouical.js"></script>
 <script src="js/scripts.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=@(Environment.GetEnvironmentVariable("WW_GOOGLE_API_KEY"))&libraries=places&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=@googleApiKey&libraries=places&callback=initMap"></script>
 </body>
 </html>
