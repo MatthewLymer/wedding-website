@@ -14,12 +14,12 @@ namespace Wedding.WebApp
 
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var port = Environment.GetEnvironmentVariable("WW_PORT") ?? "5000";
-            
             return Host
                 .CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    var port = Environment.GetEnvironmentVariable("WW_PORT") ?? "5000";                    
+                    
                     webBuilder.UseUrls($"http://*:{port}");
                     webBuilder.UseStartup<Startup>();
                 });
