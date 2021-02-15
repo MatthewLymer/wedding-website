@@ -60,6 +60,7 @@ $(document).ready(function () {
     });
 
     $('.fancybox').fancybox({
+        type: 'image',
         padding: 4,
         width: 1000,
         height: 800

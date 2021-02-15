@@ -1,10 +1,47 @@
 ﻿@page
+@using Wedding.WebApp
 @model Wedding.WebApp.Pages.Index
 
 @{
     var googleApiKey = Environment.GetEnvironmentVariable("WW_GOOGLE_API_KEY");
     var liveStreamUrl = Environment.GetEnvironmentVariable("WW_LIVE_STREAM_URL");
     var liveStreamPasscode = Environment.GetEnvironmentVariable("WW_LIVE_STREAM_PASSCODE");
+
+    var photos =
+        new[]
+        {
+            KeyValuePair.Create("img/eng_pics/DSC_0096_sm.jpg", "img/eng_pics/DSC_0096_lg.jpg"),
+            KeyValuePair.Create("img/eng_pics/IMG_20190831_144835841_sm.jpg", "img/eng_pics/IMG_20190831_144835841_lg.jpg"),
+            KeyValuePair.Create("img/eng_pics/DSC_0170_sm.jpg", "img/eng_pics/DSC_0170_lg.jpg"),
+            KeyValuePair.Create("img/eng_pics/DSC_0063_sm.jpg", "img/eng_pics/DSC_0063_lg.jpg"),
+            KeyValuePair.Create("img/eng_pics/IMG_20190820_185918465_sm.jpg", "img/eng_pics/IMG_20190820_185918465_lg.jpg"),
+            KeyValuePair.Create("img/eng_pics/DSC_0265_sm.jpg", "img/eng_pics/DSC_0265_lg.jpg"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/V5-Z8KwaZIKBU2hnpoiB6ApEBMJl2mwd9CGv5xqKvyFynFBGgCX2V40DMRSHANwVA22OcGAUv8r8AhW1OPOy4S6skD16cYn5bUKIb7J-5MUwzguzL9xyX7oNXu5Z1QV4BlcLaf2t_g=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/EQk6Zc1-6nxT18oHOOcOHBmjNPCS-RoxmhdFgleMghRPjLMqFKBn-Pic-7b4V3SAMboY144S8N4EDmw9ISyT_8AiHVclaMXUQixh2gvD9ICe87r1Vr18g8KGDGNXvQD0GFGUXn_GIw=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/g24U7cCKEObAX9lNOm6CiXjPyDMhdnSBQg3fBnDQtwb3ixxY4fXIEdthL3ZY_pDSeDYtvyWqfpF-VLlOnvT-Gsroi4aJ2EScsVNagrSDJ47d5gVsn7YfpUxykA9NlqUtKDIHdHHOvw=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/Ti7NODUuNZFaCf61bEIiSLyzZRFVRpiKJNvMpCyDJCB-ysPxR0XzYjA9Xh--U4G1E6F_WDlBCsh0cs0nOoi6nL-B9lTl6uB2nXoZWQqs7uUSEWAN7d_ZI1xNTCPhSDRkgTnbmujpww=w1920-h1080"),
+        
+            // Dione limo
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/IC2W92AypW909O7TQop1H_vtD2iSvHrGZdQ_YqlRhwbA0I1ERnOhv5Jy-8H02tW7F3Yy5vBZjlJpKDxFCDUkAVO9kUUfXB4qXIsASedaLonkw5hkx45QuyTjsLy-URbIF-fc5efzfA=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/RqLsM7aARRqXb9lbZZ9Tqgeu0MnOoCMG8n_DpdmiY2nJgRLTFIE3Olh28NU8luSNRJVMJbLPMTbqABn9zB_OiH0VXmlF7VauXy5Jt7lVjXaYQy81autlxh5S6YDkQw-9Qgp11GdiIQ=w1920-h1080"),        
+        
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/SVOzURZSHYSis37QJh5ui_xkxrlg3uwPnDRKI75nreB3XWWC4WTrLB43S8M3zWIwDlL7DxALRlaAfH4G5-PYUw2hcclxzKg-zqd0UqkhfjEzVpQJ5MGdcfWLp64fElGTw2J9fZZvug=w1920-h1080"),
+
+            // Dione and Matt in chairs
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/eGbhPABMwRiGmmTU8x5JRB9JLBZdnKKf9Ow0a0uwyVdfCXkv8OI4hRSje0Ik6HQKkwTuVvj40CHGKLhrpUEZvBZRnCyBhHRBvNtXZmVTyMXSDMSHWZNBuGw0EVl5GhHNHyPQmtbxuw=w1920-h1080"),
+            
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/WHs9461yC3ChDCkTbs0Zz4Eyh-ql5gTvheWBlFZqw29aXNvnFejYqtQXAuyiSmEoGIe-XWEfpl_1VmPejk8Y77YrePNU0qL6iz7Ms5QvYf9jJIf0Q78s2OQPPLzdjxYmVb1Y2rlLZg=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/O5vpVVx26C3PrAzWw9qGfbmnEiqxou88-sSn82WhQhpUdnGfjDTA8fvOWYF9WGBbrMyuFtLU4IYpuFK2Met6ihoK2jNMiiPYVqBZoqDYLcU3FY7CJkBoJmT8z5SvwGo6TsmIN-BpnA=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/RXoEagEph6AdZHC53GuEpd76xhOa4T3mEYs9d3O4NBB-wruNdzSI7JBtj21Uz0I3Pa2mcwCNvAxa-ObC0hS8vyXUJBWD8LGOmlGpDvFpkyZSIIuIkvyRbQLBueffSbpiEiXWc5ghsw=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/9ff74hBeFSmw2HuJY28U4RWuTIXzvpK777KmV-nEwysfOYDZsBaYAKUyKJ2JjH-4Fiz-RCXkkX1OG3MpKk_7YrEc_kD6QMWywW7LcT94b5NyMRjI0dXqV9RBR_MrzKXqZ7aKEfPXyg=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/SpiBiAv0Fs41L-89jvPygzlEQt4D5eAfoClySwLe0erSoxSMRVH0xI3EFyiHxN62dQkyl7a0vykdM2H7pyXSqw5yPr8pRRUrGaTi5SiCVDRe1hxmxA4Zt46Xr81p-Lvlx9d04Hhsmg=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/G9sG8YjvnM-8FKUPhDNHSrwdriCphDTZlnWRsJ6ojH5NEIP_3ACxrgSNcc9F-SL2JfM2XSwI4wyVO0VW-YyVuAlY8Kf8L1zZJRzn91cTN1foVaLFPhz1DnmrA0R-pGMjV_jvlTB2jQ=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/dA3offDaNT1P2OWW-jZfXGxdvdveBMESoodRtijTL8TG9X0Re2r2l5ZeO2uazRaJhaXfXDlIpUw_SWWHfS33o6CxaO6TIt6XK9KiF7MTSuCGmq80BsVERaDOHnPu1c3easkrM0HaHg=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/4mHncS7Xk-l4kpjajBzLjPdtk2KNRSSpNekUesdVBjX7HdoTW-5En7q7Mt-pgKrsKm1OkjvaWul78Zg3ANINl6izvEMy2NDqLdPkkrHcKNkPnL8seHwD9g1aLHW8zJbnl5lIxPWG9Q=w1920-h1080"),
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/DRZhe5XrHs0515b95F38wk_LdH8TiPb4S4rPPALcLAnOwx_AXp8B8GOUT9u4dGCAlNO3Ed-2iHQ9wK2r1fI820KNdH6A0A2K6uv2nPer3RQeDB_leB_dUe6lVrkOYr2mqag9kZb9SA=w1920-h1080"),
+        
+            GooglePhotoKeyValuePair.Create("https://lh3.googleusercontent.com/0mbRBsWTt0ETXXQURw4mmDeviGj2GHlGk0Vf5Lcnl4tmc_WZroy8vo8c_MXy4fZUWHK3vKD7LTIYPhmJ0-N26inVEajcapMC3lDen_ImK98bO6QZyC_6uwoLJSM2s4HcJ65Uan5TMQ=w1920-h1080")        
+        }.Chunk(12);
 }
 
 <!doctype html>
@@ -12,8 +49,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Dione &amp; Matthew are getting married!</title>
-    <meta name="description" content="We would like to invite you to our big day.">
+    <title>Dione &amp; Matthew got married!</title>
+    <meta name="description" content="We would like to relive our big day.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="css/normalize.scss">
@@ -31,20 +68,20 @@
     <section class="navigation">
         <header>
             <div class="header-content">
-                <div class="logo"><a href="#"><img src="img/logo.png" alt="Logo"></a></div>
+                <div class="logo"><a href="#"><img src="img/logo.png" alt="Dione and Matthew"></a></div>
                 <div class="header-nav">
                     <nav>
                         <ul class="primary-nav">
                             <li><a href="#intro">How we met</a></li>
                             <li><a href="#events">Events</a></li>
-<!--                            <li><a href="#instagram">Instagram</a></li>-->
-                            <li><a href="#eng-pics">Engagement</a></li>
-                            <li class="hidden-sm hidden-xs"><a href="#video-bg">Glimpse of the city</a></li>
+                            @* <li><a href="#instagram">Instagram</a></li> *@
+                            <li><a href="#eng-pics">Photos</a></li>
+                            @* <li class="hidden-sm hidden-xs"><a href="#video-bg">Glimpse of the city</a></li> *@
                         </ul>
-                        <ul class="member-actions">
-                            <li><a href="#map" class="login">Venue</a></li>
-                            <li><a href="#rsvp" class="btn-white btn-small">LIVE STREAM</a></li>
-                        </ul>
+                        @* <ul class="member-actions"> *@
+                        @*     <li><a href="#map" class="login">Venue</a></li> *@
+                        @*     <li><a href="#rsvp" class="btn-white btn-small">LIVE STREAM</a></li> *@
+                        @* </ul> *@
                     </nav>
                 </div>
                 <div class="navicon">
@@ -76,9 +113,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3>We are getting married</h3>
+                <h3>We got married</h3>
                 <p>
-                    The date is the 23<sup>rd</sup> of December 2020 and we would like you to be a part of it.
+                    The date was the 23<sup>rd</sup> of December 2020, here's our story.
                 </p>
             </div>
         </div>
@@ -138,136 +175,91 @@
     </div>
 </section>
 
-<section id="eng-pics" class="section-padding">
+<section id="eng-pics" class="gallery section-padding">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="header">Engagement Pics</h3>
+                <h3 class="header">Engagement and Ceremony Pics</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/DSC_0096_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
+        @foreach (var group in photos)
+        {
+            <div class="row column-gutter-vertical-margin">
+            @foreach (var (smallUrl, largeUrl) in group)
+            {
+                <div class="col-md-1">
+                    <a class="fancybox" rel="group" href="@largeUrl">
+                        <div class="img-wrap">
+                            <div class="overlay">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <img src="@smallUrl" alt="" />
                         </div>
-                        <img src="img/eng_pics/DSC_0096_sm.jpg" alt=""/>
-                    </div>
-                </a>
+                    </a>
+                </div>
+            }        
             </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/IMG_20190831_144835841_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/IMG_20190831_144835841_sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>            
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/DSC_0170_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/DSC_0170_sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/DSC_0063_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/DSC_0063_sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/IMG_20190820_185918465_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/IMG_20190820_185918465_sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/DSC_0265_lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/DSC_0265_sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
-        </div>
+        }
     </div>
-    <div class="container">
-        <div class="row hidden-lg hidden-md hidden-xs">
-            <div class="col-xs-12 section-border section-padding"></div>
-        </div>
-    </div>
-    <!--<div class="row">
-        <div class="col-md-12">
-            <div class="diamond floating-logo">
-                <img src="img/sketch-logo.png" alt="Sketch Logo">
-                <div class="ring"></div>
-            </div>
-        </div>
-    </div>-->
+    @* <div class="container"> *@
+    @*     <div class="row hidden-lg hidden-md hidden-xs"> *@
+    @*         <div class="col-xs-12 section-border section-padding"></div> *@
+    @*     </div> *@
+    @* </div> *@
+    @* <div class="row"> *@
+    @*     <div class="col-md-12"> *@
+    @*         <div class="diamond floating-logo"> *@
+    @*             <img src="img/sketch-logo.png" alt="Sketch Logo"> *@
+    @*             <div class="ring"></div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
 </section>
 
-<section id="video-bg" class="hidden-sm hidden-xs">
-    <div id="bgndVideo" class="player"
-         data-property="{videoURL:'https://youtu.be/n4SPMW6wru4',containment:'#video-bg',autoPlay:true, mute:true, showControls:false, startAt:24, stopAt:130, opacity:1}">
-    </div>
-    <div id="video-content">
-        <h5>Burlington</h5>
-        <p>Home of Canada's Largest Ribfest</p>
-    </div>
-</section>
+@* <section id="video-bg" class="hidden-sm hidden-xs"> *@
+@*     <div id="bgndVideo" class="player" *@
+@*          data-property="{videoURL:'https://youtu.be/n4SPMW6wru4',containment:'#video-bg',autoPlay:true, mute:true, showControls:false, startAt:24, stopAt:130, opacity:1}"> *@
+@*     </div> *@
+@*     <div id="video-content"> *@
+@*         <h5>Burlington</h5> *@
+@*         <p>Home of Canada's Largest Ribfest</p> *@
+@*     </div> *@
+@* </section> *@
 
-<section id="map" class="section-padding">
-    <div class="text-center">
-        <h3>How do I get there?</h3>
-        <p>It's way easier than you think!</p>
-    </div>
-    <div id="map-canvas"></div>
-    <div id="map-content-wrapper" class="container pointer-events-none">
-        <div class="row">
-            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
-                <div class="text-center">
-                    <div id="btn-show-content" class="toggle-map-content pointer-events-auto">
-                        <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Show info
-                    </div>
-                </div>
-                <div id="map-content" class="pointer-events-auto">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h5>St. Patricks Catholic Church</h5>
-                            <p>196 Kenwood Ave, Burlington, Ontario, L7L 4L8</p>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-12" style="padding: 5px;">
-                            <a class="btn btn-accent btn-small" id="btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Show
-                                map</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@* <section id="map" class="section-padding"> *@
+@*     <div class="text-center"> *@
+@*         <h3>How do I get there?</h3> *@
+@*         <p>It's way easier than you think!</p> *@
+@*     </div> *@
+@*     <div id="map-canvas"></div> *@
+@*     <div id="map-content-wrapper" class="container pointer-events-none"> *@
+@*         <div class="row"> *@
+@*             <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6"> *@
+@*                 <div class="text-center"> *@
+@*                     <div id="btn-show-content" class="toggle-map-content pointer-events-auto"> *@
+@*                         <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Show info *@
+@*                     </div> *@
+@*                 </div> *@
+@*                 <div id="map-content" class="pointer-events-auto"> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-12"> *@
+@*                             <h5>St. Patricks Catholic Church</h5> *@
+@*                             <p>196 Kenwood Ave, Burlington, Ontario, L7L 4L8</p> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                     <div class="row text-center"> *@
+@*                         <div class="col-md-12" style="padding: 5px;"> *@
+@*                             <a class="btn btn-accent btn-small" id="btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Show *@
+@*                                 map</a> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </section> *@
 
 <section class="rsvp text-center" id="rsvp">
-
     <div id="rsvp-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -284,34 +276,34 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <h3>View the ceremony</h3>
-                <p>For those who would like to celebrate with us virtually, we will be live streaming the service online.</p>
-                
-                @if (string.IsNullOrEmpty(liveStreamUrl))
-                {
-                    <p><strong>The live stream is not yet ready, please check again later.</strong></p>
-                }
-                else
-                {
-                    <p class="rsvp-form">
-                        <a href="@liveStreamUrl" class="btn-fill rsvp-btn">
-                            View the Live Stream
-                        </a>
-                    </p>
-                    
-                    @if (!string.IsNullOrEmpty(liveStreamPasscode))
-                    {
-                        <p>
-                            If prompted for a passcode, use: <strong>@liveStreamPasscode</strong>
-                        </p>
-                    }
-                }
-            </div>
-        </div>
-    </div>    
+    @* <div class="container"> *@
+    @*     <div class="row"> *@
+    @*         <div class="col-md-6 col-md-offset-3"> *@
+    @*             <h3>View the ceremony</h3> *@
+    @*             <p>For those who would like to celebrate with us virtually, we will be live streaming the service online.</p> *@
+    @*              *@
+    @*             @if (string.IsNullOrEmpty(liveStreamUrl)) *@
+    @*             { *@
+    @*                 <p><strong>The live stream is not yet ready, please check again later.</strong></p> *@
+    @*             } *@
+    @*             else *@
+    @*             { *@
+    @*                 <p class="rsvp-form"> *@
+    @*                     <a href="@liveStreamUrl" class="btn-fill rsvp-btn"> *@
+    @*                         View the Live Stream *@
+    @*                     </a> *@
+    @*                 </p> *@
+    @*                  *@
+    @*                 @if (!string.IsNullOrEmpty(liveStreamPasscode)) *@
+    @*                 { *@
+    @*                     <p> *@
+    @*                         If prompted for a passcode, use: <strong>@liveStreamPasscode</strong> *@
+    @*                     </p> *@
+    @*                 } *@
+    @*             } *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div>     *@
     
     @* <div class="container"> *@
     @*     <div class="row"> *@
